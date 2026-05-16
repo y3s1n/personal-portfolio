@@ -155,6 +155,10 @@ address {
 
     /* == Focus glow == */
     --shadow-glow: 0 0 0 3px rgba(100, 255, 218, 0.15);
+
+    /* == Z-index scale == */
+    --z-nav:   100;
+    --z-modal: 1000;
 }
 
 /* ---- Base ---- */
@@ -165,7 +169,7 @@ body {
     font-weight: var(--font-normal);
     line-height: var(--leading-relaxed);
     color: var(--color-text-primary);
-    background-color: var(--color-bg-page);
+    background-color: var(--color-bg-surface);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -173,18 +177,27 @@ body {
 /* ---- Container + page rhythm ---- */
 
 body > * {
+    width: 100%;
+    margin: 0;
+}
+
+.container {
     max-width: 48rem;
     margin: 0 auto;
+    padding: 0 var(--space-2xl);
+}
+
+main > .container {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
 }
 
 header {
-    padding: var(--space-5xl) var(--space-2xl) var(--space-4xl);
-    text-align: center;
-    position: relative;
-}
-
-main {
-    padding: var(--space-4xl) var(--space-2xl);
+    padding: var(--space-lg) 0;
+    background: var(--color-bg-page);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav);
 }
 
 section {
@@ -197,9 +210,8 @@ section:last-child {
 }
 
 footer {
-    text-align: center;
-    padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
-    margin-top: var(--space-5xl);
+    background: var(--color-bg-page);
+    padding: var(--space-4xl) 0 var(--space-5xl);
     position: relative;
 }
 
@@ -253,6 +265,10 @@ h2 {
     position: relative;
 }
 
+h2:first-child {
+    margin-top: 0;
+}
+
 h2::before {
     content: '';
     position: absolute;
@@ -271,19 +287,6 @@ h3 {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
 }
-
-/* ---- Tagline ---- */
-
-.tagline {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
-    color: var(--color-text-accent);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    margin-bottom: 0;
-}
-
 
 /* ---- Paragraphs ---- */
 
@@ -413,7 +416,68 @@ address {
     margin-top: var(--space-2xl);
 }
 
+/* ---- Hero ---- */
 
+.hero {
+    background: var(--color-bg-page);
+    padding: var(--space-6xl) 0;
+    margin-bottom: 0;
+}
+
+.hero h1 {
+    max-width: 16ch;
+    margin-bottom: var(--space-xl);
+}
+
+.hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text-accent);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    margin-bottom: var(--space-lg);
+    max-width: none;
+}
+
+.hero-lede {
+    font-size: var(--text-xl);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2xl);
+    max-width: 40ch;
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 2px;
+    border: var(--border-thin) solid currentColor;
+    background: transparent;
+    color: var(--color-text-accent);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--color-text-accent);
+    color: var(--color-bg-page);
+}
+
+.btn,
+.btn:hover {
+    border-bottom-width: var(--border-thin);
+    padding-bottom: var(--space-md);
+}
 
 /* ---- Responsive ---- */
 
@@ -443,6 +507,14 @@ address {
     #timeline {
         padding-left: var(--space-2xl);
     }
+
+    .hero {
+        padding: var(--space-3xl) 0;
+    }
+
+    .hero h1 {
+        font-size: var(--text-4xl);
+    }
 }
 
 /* ---- Print ---- */
@@ -451,6 +523,15 @@ address {
     body {
         background: white;
         color: black;
+    }
+
+    header {
+        position: static;
+        background: white;
+    }
+
+    footer {
+        background: white;
     }
 
     section {
@@ -473,5 +554,16 @@ address {
     h2,
     h3 {
         page-break-after: avoid;
+    }
+
+    .hero {
+        padding: 0;
+        background: white;
+    }
+
+    .btn {
+        border: 1px solid black;
+        color: black;
+        background: transparent;
     }
 }
