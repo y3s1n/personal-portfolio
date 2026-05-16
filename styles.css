@@ -136,8 +136,8 @@ address {
     --color-text-accent:    var(--cyan-500);
     --color-text-emphasis:  var(--cyan-300);
 
-    --color-bg-page:     var(--navy-900);
-    --color-bg-surface:  var(--navy-800);
+    --color-bg-deck:     var(--navy-900);
+    --color-bg-page:     var(--navy-800);
     --color-bg-elevated: var(--navy-700);
 
     --color-border-subtle:   var(--navy-600);
@@ -169,7 +169,7 @@ body {
     font-weight: var(--font-normal);
     line-height: var(--leading-relaxed);
     color: var(--color-text-primary);
-    background-color: var(--color-bg-surface);
+    background-color: var(--color-bg-page);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -194,7 +194,8 @@ main > .container {
 
 header {
     padding: var(--space-lg) 0;
-    background: var(--color-bg-page);
+    background: var(--color-bg-deck);
+    border-bottom: var(--border-thin) solid var(--color-border-subtle);
     position: sticky;
     top: 0;
     z-index: var(--z-nav);
@@ -210,33 +211,9 @@ section:last-child {
 }
 
 footer {
-    background: var(--color-bg-page);
+    background: var(--color-bg-deck);
+    border-top: var(--border-thin) solid var(--color-border-subtle);
     padding: var(--space-4xl) 0 var(--space-5xl);
-    position: relative;
-}
-
-/* ---- Hairlines ---- */
-
-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 1px;
-    background: var(--color-border-subtle);
-}
-
-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 1px;
-    background: var(--color-border-subtle);
 }
 
 /* ---- Headings ---- */
@@ -419,7 +396,7 @@ address {
 /* ---- Hero ---- */
 
 .hero {
-    background: var(--color-bg-page);
+    background: var(--color-bg-deck);
     padding: var(--space-6xl) 0;
     margin-bottom: 0;
 }
@@ -470,7 +447,7 @@ address {
 
 .btn:hover {
     background: var(--color-text-accent);
-    color: var(--color-bg-page);
+    color: var(--color-bg-deck);
 }
 
 .btn,
@@ -504,10 +481,6 @@ address {
         font-size: 1.5rem;
     }
 
-    #timeline {
-        padding-left: var(--space-2xl);
-    }
-
     .hero {
         padding: var(--space-3xl) 0;
     }
@@ -528,21 +501,17 @@ address {
     header {
         position: static;
         background: white;
+        border: 0;
     }
 
     footer {
         background: white;
+        border: 0;
     }
 
     section {
         margin-bottom: 2rem;
         page-break-inside: avoid;
-    }
-
-    section:not(:last-child)::after,
-    header::after,
-    footer::before {
-        display: none;
     }
 
     a {
