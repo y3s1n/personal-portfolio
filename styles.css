@@ -192,7 +192,7 @@ main > .container {
     padding-bottom: var(--space-4xl);
 }
 
-header {
+.site-header {
     padding: var(--space-lg) 0;
     background: var(--color-bg-deck);
     border-bottom: var(--border-thin) solid var(--color-border-subtle);
@@ -263,6 +263,17 @@ h3 {
     color: var(--color-text-primary);
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
+}
+
+.section-number {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6em;
+    font-weight: var(--font-semibold);
+    color: var(--color-text-accent);
+    letter-spacing: var(--tracking-wider);
+    margin-right: var(--space-md);
+    vertical-align: 0.2em;
 }
 
 /* ---- Paragraphs ---- */
@@ -393,6 +404,21 @@ address {
     margin-top: var(--space-2xl);
 }
 
+/* ---- Page header ---- */
+
+.page-header {
+    margin-bottom: var(--space-5xl);
+    padding-top: var(--space-2xl);
+}
+
+.page-header h1 {
+    margin-bottom: var(--space-xl);
+}
+
+.page-header .hero-lede {
+    margin-bottom: 0;
+}
+
 /* ---- Hero ---- */
 
 .hero {
@@ -456,6 +482,75 @@ address {
     padding-bottom: var(--space-md);
 }
 
+/* ---- Experience cards ---- */
+
+.exp-card {
+    background: var(--color-bg-deck);
+    border: var(--border-thin) solid var(--color-border-subtle);
+    border-radius: 2px;
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.exp-card:last-child {
+    margin-bottom: 0;
+}
+
+.exp-card-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-xl);
+    align-items: baseline;
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    border-bottom: var(--border-thin) solid var(--color-border-subtle);
+}
+
+.exp-card-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-accent);
+    letter-spacing: var(--tracking-wider);
+    margin: 0;
+}
+
+.exp-card-meta h3 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-xl);
+}
+
+.exp-card-role {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin: 0;
+    max-width: none;
+}
+
+.exp-card-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-text-accent);
+    letter-spacing: var(--tracking-wide);
+    margin: 0;
+    text-align: right;
+    display: block;
+    white-space: nowrap;
+}
+
+.exp-card ul {
+    padding-left: var(--space-2xl);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.exp-card li:last-child {
+    margin-bottom: 0;
+}
+
 /* ---- Responsive ---- */
 
 @media (max-width: 768px) {
@@ -488,6 +583,30 @@ address {
     .hero h1 {
         font-size: var(--text-4xl);
     }
+
+    .exp-card {
+        padding: var(--space-xl);
+    }
+
+    .exp-card-header {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+        align-items: flex-start;
+    }
+
+    .exp-card-number {
+        order: -1;
+    }
+
+    .exp-card-date {
+        text-align: left;
+        order: 3;
+    }
+
+    .section-number {
+        font-size: 0.55em;
+        margin-right: var(--space-sm);
+    }
 }
 
 /* ---- Print ---- */
@@ -498,7 +617,7 @@ address {
         color: black;
     }
 
-    header {
+    .site-header {
         position: static;
         background: white;
         border: 0;
@@ -534,5 +653,27 @@ address {
         border: 1px solid black;
         color: black;
         background: transparent;
+    }
+
+    .exp-card {
+        background: white;
+        border: 1px solid black;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        page-break-inside: avoid;
+    }
+
+    .exp-card-header {
+        border-bottom-color: black;
+    }
+
+    .exp-card-number,
+    .exp-card-role,
+    .exp-card-date {
+        color: black;
+    }
+
+    .section-number {
+        color: black;
     }
 }
