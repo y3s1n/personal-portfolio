@@ -47,7 +47,8 @@ address {
     font-style: normal;
 }
 
-.visually-hidden {
+/* Made for icons in the footer */
+.visually-hidden { 
     position: absolute;
     width: 1px;
     height: 1px;
@@ -402,6 +403,45 @@ dd {
 
 address {
     margin-top: var(--space-2xl);
+}
+
+/* ---- Social links ---- */
+
+.social-links {
+    display: flex;
+    gap: var(--space-xl);
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text-secondary);
+    border-bottom: var(--border-thin) solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-text-accent);
+    border-color: var(--color-text-accent);
+}
+
+.social-links svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.social-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
 }
 
 /* ---- Page header ---- */
