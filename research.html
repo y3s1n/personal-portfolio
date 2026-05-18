@@ -24,6 +24,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <script src="components/weather-status.js" defer></script>
+
+    <style>
+        weather-status {
+            --weather-bg:         var(--color-bg-page);
+            --weather-surface:    var(--color-bg-deck);
+            --weather-border:     var(--color-border-default);
+            --weather-text:       var(--color-text-primary);
+            --weather-text-muted: var(--color-text-secondary);
+            --weather-accent:     var(--color-text-accent);
+            --weather-font-sans:  var(--font-sans);
+            --weather-font-mono:  var(--font-mono);
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -62,6 +76,11 @@
             <section aria-labelledby="drones-heading">
                 <h2 id="drones-heading"><span class="section-number">01</span>Drones</h2>
                 <p>I am starting my research this summer regarding drones. I will work on the development of a system that diagnoses and adapts to flight anomalies mid-flight.</p>
+            </section>
+
+            <section aria-labelledby="weather-heading" style="margin-top: var(--space-3xl);">
+                <h2 id="weather-heading"><span class="section-number">02</span>Local Conditions</h2>
+                <weather-status></weather-status>
             </section>
         </div>
     </main>
