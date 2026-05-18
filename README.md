@@ -148,8 +148,9 @@ The worker does not need to be in the project repository. This violates the read
 
 The website and worker were both deployed using [cloudflare](https://www.cloudflare.com/)
 
-[personal portfolio](https://my-portfolio-dzn.pages.dev/)
-[worker](https://atc-weather-proxy.yesinq77.workers.dev)
+Check out the website at: [personal portfolio](https://my-portfolio-dzn.pages.dev/)
+
+Worker proxy is deployed at: [worker](https://atc-weather-proxy.yesinq77.workers.dev)
 
 
 
