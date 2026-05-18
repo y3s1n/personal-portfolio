@@ -120,10 +120,38 @@ Web3forms was chosen because it offers a free service with integrated defensive 
         - if online `fetch(request)` goes through
         - if offline cached game is returned
         - if service worker fails return 503 service unavailable
+    - fixed routing problems in v1 -> v2 update
 
-__Service worker update v1 to v2__
 
-Routing problems fixed
+- Weather Status Worker
+__What it does__:
+
+- Encapusalted shaodw dom web component
+- Cloudflare worker that proxies the FAA weather API
+- worker was needed because weather API does not expose CORS
+- origin request validation before GET to FAA website
+- Refresh every 5 minutes to reduce request load
+
+__How it works__:
+ 
+1. Receives a `GET` request from a browser at `atc-weather-proxy.yesinq77.workers.dev`
+2. Reads the `Origin` header and checks it against the `ALLOWED_ORIGINS` list
+3. Forwards the query to `https://aviationweather.gov/api/data/metar`
+4. Wraps the response with `Access-Control-Allow-Origin` headers
+5. Returns to the browser, the browser's CORS check now passes
+
+__Worker placement ADR__
+The worker does not need to be in the project repository. This violates the readability and clarity of the project repository, however, the decision to add it was made because the worker code will be used for grading.
+
+
+## Website deployment and links
+
+The website and worker were both deployed using [cloudflare](https://www.cloudflare.com/)
+
+[personal portfolio](https://my-portfolio-dzn.pages.dev/)
+[worker](https://atc-weather-proxy.yesinq77.workers.dev)
+
+
 
 
 

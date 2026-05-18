@@ -10,7 +10,7 @@ const AIRPORTS = [
 ];
 
 const REFRESH_MS = 5 * 60 * 1000;
-const API_URL = 'https://aviationweather.gov/api/data/metar';
+const API_URL = 'https://atc-weather-proxy.yesinq77.workers.dev/';
 
 const TEMPLATE = `
     <style>
@@ -265,11 +265,11 @@ class WeatherStatus extends HTMLElement {
         if (!ceiling) {
             const lowest = metar.clouds[0];
             return (lowest.base !== null && lowest.base !== undefined)
-                ? `${lowest.cover} ${(lowest.base * 100).toLocaleString()}ft`
+                ? `${lowest.cover} ${lowest.base.toLocaleString()}ft`
                 : 'Clear';
         }
 
-        return `${ceiling.cover} ${(ceiling.base * 100).toLocaleString()}ft`;
+        return `${ceiling.cover} ${ceiling.base.toLocaleString()}ft`;
     }
 
     formatTime(date) {
