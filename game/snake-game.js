@@ -296,7 +296,9 @@ class SnakeGame extends HTMLElement {
     }
 
     start() {
-        if (this.running) return;
+        if (this.running && this.tickHandle) {
+            clearInterval(this.tickHandle);
+        }
         this.reset();
         this.running = true;
         this.statusEl.textContent = '';
