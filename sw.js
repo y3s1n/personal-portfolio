@@ -8,7 +8,16 @@ const GAME_ASSETS = [
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => cache.addAll(GAME_ASSETS))
+        caches.open(CACHE_NAME).then((cache) => {
+            return Promise.all(
+                GAME_ASSETS.map(async (url) => {
+                    const response = await fetch(url, { redirect: 'follow'});
+                    if (response.ok || response.type === 'opaqueredirect') {
+                        await cache.put(url, response);
+                    }
+                })
+            );
+        })
     );
     self.skipWaiting();
 });
@@ -33,8 +42,15 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(
             fetch(request).catch(async () => {
                 const cache = await caches.open(CACHE_NAME);
-                return (await cache.match('/game/index.html')) ||
-                    new Response('Offline', { status: 503 });
+                const cached = await cache.match('/game/index.html');
+                if(cached) {
+                    const body = await cached.text();
+                    return new Response(body, {
+                        status: 200,
+                        headers: {'Content-Type': 'text/html'}
+                    });
+                }
+                return new Response('Offline', { status: 503 });
             })
         );
         return;
