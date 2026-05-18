@@ -129,6 +129,21 @@ address {
     --cyan-500: #64ffda;
     --cyan-700: #3dccaa;
 
+    /* == Light theme primitives — warm paper aesthetic == */
+    --paper-100: #f5f1e8;
+    --paper-200: #ebe6d8;
+    --paper-300: #ddd6c3;
+    --paper-400: #c8c0a9;
+    --paper-500: #a8a08a;
+
+    --ink-dark-100: #1a1f2e;
+    --ink-dark-300: #4a5468;
+    --ink-dark-500: #7a8294;
+
+    --cyan-muted-300: #1a8a72;
+    --cyan-muted-500: #0d7058;
+    --cyan-muted-700: #064839;
+
     /* == Semantic tokens — roles == */
 
     --color-text-primary:   var(--ink-100);
@@ -162,6 +177,28 @@ address {
     --z-modal: 1000;
 }
 
+[data-theme="light"] {
+    --color-text-primary:   var(--ink-dark-100);
+    --color-text-secondary: var(--ink-dark-300);
+    --color-text-muted:     var(--ink-dark-500);
+    --color-text-accent:    var(--cyan-muted-500);
+    --color-text-emphasis:  var(--cyan-muted-300);
+
+    --color-bg-page:        var(--paper-100);
+    --color-bg-deck:        var(--paper-200);
+    --color-bg-elevated:    var(--paper-300);
+
+    --color-border-subtle:   var(--paper-400);
+    --color-border-default:  var(--paper-500);
+    --color-border-emphasis: var(--cyan-muted-500);
+
+    --color-link:        var(--cyan-muted-500);
+    --color-link-hover:  var(--cyan-muted-700);
+    --color-focus-ring:  var(--cyan-muted-500);
+
+    --shadow-glow: 0 0 0 3px rgba(13, 112, 88, 0.2);
+}
+
 /* ---- Base ---- */
 
 body {
@@ -173,6 +210,35 @@ body {
     background-color: var(--color-bg-page);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Theme transitions ---- */
+
+body,
+.site-header,
+footer,
+.hero,
+.exp-card,
+.form-group input,
+.form-group textarea,
+.btn {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body,
+    .site-header,
+    footer,
+    .hero,
+    .exp-card,
+    .form-group input,
+    .form-group textarea,
+    .btn {
+        transition: none;
+    }
 }
 
 /* ---- Container + page rhythm ---- */
@@ -317,11 +383,16 @@ a:hover {
 
 /* ---- Navigation ---- */
 
+nav[aria-label="Primary navigation"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+}
+
 .nav-list {
     display: flex;
     gap: var(--space-xl);
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
 .nav-list a {
@@ -338,6 +409,48 @@ a:hover {
 .nav-list a:hover {
     color: var(--color-text-accent);
     border-color: var(--color-text-accent);
+}
+
+/* ---- Theme toggle ---- */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background: transparent;
+    border: var(--border-thin) solid transparent;
+    border-radius: 2px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    color: var(--color-text-accent);
+    border-color: var(--color-border-emphasis);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Dark mode: show sun clicking goes to light */
+.theme-icon-moon {
+    display: none;
+}
+
+/* Light mode: show moon clicking goes to dark */
+[data-theme="light"] .theme-icon-sun {
+    display: none;
+}
+
+[data-theme="light"] .theme-icon-moon {
+    display: inline-block;
 }
 
 /* ---- Lists ---- */
@@ -722,6 +835,14 @@ address {
         font-size: 0.55em;
         margin-right: var(--space-sm);
     }
+
+    nav[aria-label="Primary navigation"] {
+        gap: var(--space-md);
+    }
+
+    .nav-list {
+        gap: var(--space-md);
+    }
 }
 
 /* ---- Print ---- */
@@ -790,5 +911,9 @@ address {
 
     .section-number {
         color: black;
+    }
+
+    .theme-toggle {
+        display: none;
     }
 }

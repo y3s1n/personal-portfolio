@@ -8,10 +8,22 @@
     <meta property="og:description" content="Get in touch with Yesin Qasem, CS senior at the University of San Diego. Available by email, LinkedIn, or GitHub.">
     <meta property="og:type" content="profile">
     <title>Contact - Yesin Qasem</title>
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme-preference');
+                var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                if ((stored || system) === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header class="site-header">
@@ -23,6 +35,18 @@
                     <li><a href="research.html">Research</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
+                <button type="button" class="theme-toggle" aria-label="Toggle color theme">
+                    <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2"/><path d="M12 20v2"/>
+                        <path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+                        <path d="M2 12h2"/><path d="M20 12h2"/>
+                        <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                    <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
