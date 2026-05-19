@@ -148,7 +148,11 @@ class SnakeGame extends HTMLElement {
         this.running = false;
         this.tickHandle = null;
 
-        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onKeyDown    = this.onKeyDown.bind(this);
+        this.onTouchStart = this.onTouchStart.bind(this);
+        this.onTouchEnd   = this.onTouchEnd.bind(this);
+        this.touchStartX  = 0;
+        this.touchStartY  = 0;
     }
 
     connectedCallback() {
@@ -166,12 +170,16 @@ class SnakeGame extends HTMLElement {
 
         this.startBtn.addEventListener('click', () => this.start());
         document.addEventListener('keydown', this.onKeyDown);
+        this.canvas.addEventListener('touchstart', this.onTouchStart, { passive: true });
+        this.canvas.addEventListener('touchend',   this.onTouchEnd,   { passive: true });
 
         this.reset();
     }
 
     disconnectedCallback() {
         document.removeEventListener('keydown', this.onKeyDown);
+        this.canvas.removeEventListener('touchstart', this.onTouchStart);
+        this.canvas.removeEventListener('touchend',   this.onTouchEnd);
         if (this.tickHandle) {
             clearInterval(this.tickHandle);
         }
@@ -310,6 +318,30 @@ class SnakeGame extends HTMLElement {
     setDirection(dx, dy) {
         if (dx === -this.direction.x && dy === -this.direction.y) return;
         this.pendingDirection = { x: dx, y: dy };
+    }
+
+    onTouchStart(e) {
+        if (!this.running) return;
+        const touch = e.changedTouches[0];
+        this.touchStartX = touch.clientX;
+        this.touchStartY = touch.clientY;
+    }
+
+    onTouchEnd(e) {
+        if (!this.running) return;
+
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - this.touchStartX;
+        const dy = touch.clientY - this.touchStartY;
+
+        const MIN_SWIPE = 20;
+        if (Math.abs(dx) < MIN_SWIPE && Math.abs(dy) < MIN_SWIPE) return;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            this.setDirection(dx > 0 ? 1 : -1, 0);
+        } else {
+            this.setDirection(0, dy > 0 ? 1 : -1);
+        }
     }
 
     onKeyDown(e) {
